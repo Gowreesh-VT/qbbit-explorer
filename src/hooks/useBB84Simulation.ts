@@ -93,9 +93,9 @@ export const useBB84Simulation = () => {
     setPhotons(newPhotons);
   }, [eveEnabled]);
 
-  const startSimulation = useCallback(() => {
+  const startSimulation = useCallback((count: number = 16) => {
     setIsSimulating(true);
-    generatePhotons();
+    generatePhotons(count);
   }, [generatePhotons]);
 
   const resetSimulation = useCallback(() => {

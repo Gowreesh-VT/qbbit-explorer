@@ -7,7 +7,6 @@ import { SimulationProvider } from "./contexts/SimulationContext";
 import Home from "./pages/Home";
 import Theory from "./pages/Theory";
 import Simulation from "./pages/Simulation";
-import KeyExtraction from "./pages/KeyExtraction";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -20,11 +19,10 @@ const App = () => (
         <Sonner />
         <BrowserRouter>
           <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/theory" element={<Theory />} />
-            <Route path="/simulation" element={<Simulation />} />
-            <Route path="/key-extraction" element={<KeyExtraction />} />
-            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+          <Route path="/" element={<Home />} />
+          <Route path="/theory" element={<Theory />} />
+          <Route path="/simulation" element={<Simulation />} />
+          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>

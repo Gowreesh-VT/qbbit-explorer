@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Lock, Atom, Sparkles } from "lucide-react";
 
+
 const Home = () => {
   return (
     <div className="min-h-screen bg-background relative overflow-hidden">

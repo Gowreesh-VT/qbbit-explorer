@@ -9,6 +9,8 @@ import Theory from "./pages/Theory";
 import Simulation from "./pages/Simulation";
 import NotFound from "./pages/NotFound";
 
+
+
 const queryClient = new QueryClient();
 
 const App = () => (

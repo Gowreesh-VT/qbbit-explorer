@@ -12,6 +12,7 @@ import KeyResults from "@/components/simulation/KeyResults";
 import AnalyticsDashboard from "@/components/simulation/AnalyticsDashboard";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
+
 const Simulation = () => {
   const {
     photons,

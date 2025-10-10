@@ -5,6 +5,7 @@ type SimulationContextType = ReturnType<typeof useBB84Simulation>;
 
 const SimulationContext = createContext<SimulationContextType | undefined>(undefined);
 
+
 export const SimulationProvider = ({ children }: { children: ReactNode }) => {
   const simulation = useBB84Simulation();
 

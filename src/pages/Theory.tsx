@@ -3,6 +3,8 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight, ArrowLeft } from "lucide-react";
 import { Card } from "@/components/ui/card";
 
+
+
 const Theory = () => {
   return (
     <div className="min-h-screen bg-background">

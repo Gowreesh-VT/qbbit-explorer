@@ -8,6 +8,7 @@ interface PhotonSceneProps {
   currentPhotonIndex: number;
 }
 
+
 const PhotonScene = ({ photons, currentPhotonIndex }: PhotonSceneProps) => {
   return (
     <div className="w-full h-[600px] bg-background rounded-lg overflow-hidden border border-border">

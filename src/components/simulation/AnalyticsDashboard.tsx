@@ -3,6 +3,7 @@ import { Progress } from "@/components/ui/progress";
 import { PhotonData } from "@/hooks/useBB84Simulation";
 import { TrendingUp, Shield, AlertTriangle, CheckCircle } from "lucide-react";
 
+
 interface AnalyticsDashboardProps {
   photons: PhotonData[];
   secretKey: (0 | 1)[];

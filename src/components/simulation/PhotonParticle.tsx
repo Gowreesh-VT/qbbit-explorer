@@ -11,6 +11,7 @@ interface PhotonParticleProps {
   isActive: boolean;
 }
 
+
 const PhotonParticle = ({ 
   position, 
   polarization, 

@@ -4,6 +4,7 @@ export type Basis = "rectilinear" | "diagonal";
 export type Bit = 0 | 1;
 export type Polarization = "vertical" | "horizontal" | "diagonal" | "antidiagonal";
 
+
 export interface PhotonData {
   id: number;
   aliceBit: Bit;

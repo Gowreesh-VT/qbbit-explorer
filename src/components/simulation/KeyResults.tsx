@@ -8,6 +8,7 @@ interface KeyResultsProps {
   errorRate: number;
 }
 
+
 const KeyResults = ({ photons, secretKey, errorRate }: KeyResultsProps) => {
   return (
     <div className="space-y-6">

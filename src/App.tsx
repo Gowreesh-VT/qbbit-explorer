@@ -19,7 +19,7 @@ const App = () => (
       <SimulationProvider>
         <Toaster />
         <Sonner />
-        <BrowserRouter basename="/qbbit-explorer">
+        <BrowserRouter>
           <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/theory" element={<Theory />} />

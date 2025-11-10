@@ -98,6 +98,60 @@ const Home = () => {
             </p>
           </div>
         </div>
+
+        {/* Meet the Team Section */}
+        <div className="mt-32 max-w-6xl mx-auto">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4 bg-gradient-quantum bg-clip-text text-transparent">
+              Meet the Team
+            </h2>
+            <p className="text-muted-foreground text-lg">
+              The minds behind this quantum cryptography simulator
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {[
+              {
+                name: "Dr. Alice Quantum",
+                role: "Quantum Physics Lead",
+                description: "Expert in quantum mechanics and cryptography",
+                color: "primary"
+              },
+              {
+                name: "Bob Cipher",
+                role: "Frontend Developer",
+                description: "3D visualization and interactive UI specialist",
+                color: "secondary"
+              },
+              {
+                name: "Eve Security",
+                role: "Security Researcher",
+                description: "Cryptanalysis and eavesdropping simulation",
+                color: "destructive"
+              },
+              {
+                name: "Charlie Designer",
+                role: "UI/UX Designer",
+                description: "Creating intuitive quantum experiences",
+                color: "accent"
+              }
+            ].map((member, index) => (
+              <div 
+                key={member.name}
+                className="group p-6 bg-card border border-border rounded-lg hover:border-primary/50 transition-all duration-300 hover:shadow-lg animate-fade-in"
+                style={{ animationDelay: `${index * 0.1}s` }}
+              >
+                <div className={`w-20 h-20 mx-auto mb-4 rounded-full bg-${member.color}/20 flex items-center justify-center text-3xl font-bold text-${member.color} group-hover:scale-110 transition-transform`}>
+                  {member.name.charAt(0)}
+                </div>
+                <h3 className="text-xl font-semibold text-center mb-1">{member.name}</h3>
+                <p className="text-sm text-primary text-center mb-3">{member.role}</p>
+                <p className="text-sm text-muted-foreground text-center">{member.description}</p>
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
     </div>
   );

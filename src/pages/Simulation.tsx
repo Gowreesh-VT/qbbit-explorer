@@ -5,11 +5,12 @@ import { Card } from "@/components/ui/card";
 import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
 import { Slider } from "@/components/ui/slider";
-import { ArrowLeft, Play, RotateCcw, Info } from "lucide-react";
+import { ArrowLeft, Play, RotateCcw, Info, ListOrdered } from "lucide-react";
 import PhotonScene from "@/components/simulation/PhotonScene";
 import { useSimulation } from "@/contexts/SimulationContext";
 import KeyResults from "@/components/simulation/KeyResults";
 import AnalyticsDashboard from "@/components/simulation/AnalyticsDashboard";
+import StepByStepMode from "@/components/simulation/StepByStepMode";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 
@@ -28,6 +29,7 @@ const Simulation = () => {
 
   const [currentPhotonIndex, setCurrentPhotonIndex] = useState(-1);
   const [photonCount, setPhotonCount] = useState(16);
+  const [stepByStepMode, setStepByStepMode] = useState(false);
 
   useEffect(() => {
     if (isSimulating && currentPhotonIndex < photons.length - 1) {
@@ -107,7 +109,7 @@ const Simulation = () => {
               <div className="flex gap-4">
                 <Button
                   onClick={handleStart}
-                  disabled={isSimulating && currentPhotonIndex < photons.length - 1}
+                  disabled={(isSimulating && currentPhotonIndex < photons.length - 1) || stepByStepMode}
                   className="bg-gradient-quantum flex-1"
                 >
                   <Play className="mr-2 w-4 h-4" />
@@ -116,19 +118,37 @@ const Simulation = () => {
                 <Button
                   onClick={handleReset}
                   variant="outline"
-                  disabled={!isSimulating}
+                  disabled={!isSimulating && !stepByStepMode}
                 >
                   <RotateCcw className="mr-2 w-4 h-4" />
                   Reset
+                </Button>
+                <Button
+                  onClick={() => setStepByStepMode(!stepByStepMode)}
+                  variant="secondary"
+                  disabled={photons.length === 0}
+                >
+                  <ListOrdered className="mr-2 w-4 h-4" />
+                  {stepByStepMode ? "Exit" : "Step-by-Step"}
                 </Button>
               </div>
             </div>
           </Card>
 
-          {/* 3D Visualization */}
-          {photons.length > 0 && (
+          {/* Step-by-Step Mode or Normal Visualization */}
+          {photons.length > 0 && stepByStepMode ? (
+            <StepByStepMode 
+              photons={photons} 
+              onExit={() => setStepByStepMode(false)} 
+            />
+          ) : photons.length > 0 && (
             <>
-              <PhotonScene photons={photons} currentPhotonIndex={currentPhotonIndex} />
+              <PhotonScene 
+                photons={photons} 
+                currentPhotonIndex={currentPhotonIndex}
+                eveEnabled={eveEnabled}
+                showBlochSphere={true}
+              />
 
               {/* Legend */}
               <Card className="p-4">

@@ -1,15 +1,23 @@
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls, Stars, Text } from "@react-three/drei";
 import PhotonParticle from "./PhotonParticle";
+import QuantumChannel from "./QuantumChannel";
+import EveAvatar from "./EveAvatar";
+import BlochSphere from "./BlochSphere";
 import { PhotonData } from "@/hooks/useBB84Simulation";
 
 interface PhotonSceneProps {
   photons: PhotonData[];
   currentPhotonIndex: number;
+  eveEnabled?: boolean;
+  showBlochSphere?: boolean;
 }
 
 
-const PhotonScene = ({ photons, currentPhotonIndex }: PhotonSceneProps) => {
+const PhotonScene = ({ photons, currentPhotonIndex, eveEnabled = false, showBlochSphere = true }: PhotonSceneProps) => {
+  const currentPhoton = currentPhotonIndex >= 0 ? photons[currentPhotonIndex] : null;
+  const isEveIntercepting = currentPhoton?.eveIntercepted || false;
+
   return (
     <div className="w-full h-[600px] bg-background rounded-lg overflow-hidden border border-border">
       <Canvas camera={{ position: [0, 2, 8], fov: 50 }}>
@@ -65,11 +73,26 @@ const PhotonScene = ({ photons, currentPhotonIndex }: PhotonSceneProps) => {
           </Text>
         </group>
 
-        {/* Connection line */}
-        <mesh position={[0, 0, 0]}>
-          <boxGeometry args={[8, 0.02, 0.02]} />
-          <meshBasicMaterial color="#444" opacity={0.5} transparent />
-        </mesh>
+        {/* Quantum Channel */}
+        <QuantumChannel 
+          eveEnabled={eveEnabled} 
+          photonProgress={currentPhotonIndex >= 0 ? (currentPhotonIndex / photons.length) : 0}
+        />
+
+        {/* Eve Avatar */}
+        {eveEnabled && (
+          <EveAvatar isIntercepting={isEveIntercepting} />
+        )}
+
+        {/* Bloch Sphere - show for current photon */}
+        {showBlochSphere && currentPhoton && (
+          <BlochSphere
+            polarization={currentPhoton.polarization}
+            position={[-2, 2, 0]}
+            showMeasurement={true}
+            measurementBasis={currentPhoton.bobBasis}
+          />
+        )}
 
         {/* Photons */}
         {photons.map((photon, index) => {

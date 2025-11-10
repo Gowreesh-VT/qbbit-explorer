@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Lock, Atom, Sparkles } from "lucide-react";
+import { ArrowRight, Lock, Atom, Sparkles, Globe, Github } from "lucide-react";
 
 
 const Home = () => {
@@ -113,28 +113,36 @@ const Home = () => {
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
               {
-                name: "Dr. Alice Quantum",
-                role: "Quantum Physics Lead",
-                description: "Expert in quantum mechanics and cryptography",
-                color: "primary"
+                name: "Gowreesh V T",
+                role: "Simulation Lead",
+                description: "Meta Certified Full-Stack Developer",
+                color: "primary",
+                portfolio: "https://gowreesh.works",
+                github: "https://github.com/Gowreesh-VT"
               },
               {
-                name: "Bob Cipher",
-                role: "Frontend Developer",
-                description: "3D visualization and interactive UI specialist",
-                color: "secondary"
+                name: "Pranav A",
+                role: "Report Writer",
+                description: "Aspiring Quantum Researcher",
+                color: "secondary",
+                portfolio: "https://pranav-portfolio.example.com",
+                github: "https://github.com/pranav-a"
               },
               {
-                name: "Eve Security",
-                role: "Security Researcher",
-                description: "Cryptanalysis and eavesdropping simulation",
-                color: "destructive"
+                name: "Surya S",
+                role: "PPT Creator",
+                description: "Quantum cryptography enthusiast",
+                color: "destructive",
+                portfolio: "https://doortosurya.me",
+                github: "https://github.com/surya-s"
               },
               {
-                name: "Charlie Designer",
-                role: "UI/UX Designer",
-                description: "Creating intuitive quantum experiences",
-                color: "accent"
+                name: "Naveena Priyan",
+                role: "UI/UX Designer and Content Researcher",
+                description: "Passionate about making complex topics accessible",
+                color: "accent",
+                portfolio: "https://naveena-portfolio.example.com",
+                github: "https://github.com/naveena-priyan"
               }
             ].map((member, index) => (
               <div 
@@ -147,7 +155,33 @@ const Home = () => {
                 </div>
                 <h3 className="text-xl font-semibold text-center mb-1">{member.name}</h3>
                 <p className="text-sm text-primary text-center mb-3">{member.role}</p>
-                <p className="text-sm text-muted-foreground text-center">{member.description}</p>
+                <p className="text-sm text-muted-foreground text-center mb-4">{member.description}</p>
+                
+                {/* Social Links */}
+                <div className="flex justify-center gap-3 mt-4">
+                  {member.portfolio && (
+                    <a 
+                      href={member.portfolio}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-8 h-8 flex items-center justify-center rounded-full bg-primary/10 hover:bg-primary/20 text-primary transition-colors"
+                      aria-label="Portfolio"
+                    >
+                      <Globe className="w-4 h-4" />
+                    </a>
+                  )}
+                  {member.github && (
+                    <a 
+                      href={member.github}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-8 h-8 flex items-center justify-center rounded-full bg-primary/10 hover:bg-primary/20 text-primary transition-colors"
+                      aria-label="GitHub"
+                    >
+                      <Github className="w-4 h-4" />
+                    </a>
+                  )}
+                </div>
               </div>
             ))}
           </div>

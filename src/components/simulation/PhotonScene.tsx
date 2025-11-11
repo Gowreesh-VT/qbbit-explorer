@@ -88,7 +88,7 @@ const PhotonScene = ({ photons, currentPhotonIndex, eveEnabled = false, showBloc
         {showBlochSphere && currentPhoton && (
           <BlochSphere
             polarization={currentPhoton.polarization}
-            position={[-2, 2, 0]}
+            position={[0, -1.5, 0]}
             showMeasurement={true}
             measurementBasis={currentPhoton.bobBasis}
           />

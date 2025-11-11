@@ -5,13 +5,15 @@ import { Card } from "@/components/ui/card";
 import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
 import { Slider } from "@/components/ui/slider";
-import { ArrowLeft, Play, RotateCcw, Info, ListOrdered } from "lucide-react";
+import { ArrowLeft, Play, RotateCcw, Info, ListOrdered, Waves, HelpCircle } from "lucide-react";
 import PhotonScene from "@/components/simulation/PhotonScene";
 import { useSimulation } from "@/contexts/SimulationContext";
 import KeyResults from "@/components/simulation/KeyResults";
 import AnalyticsDashboard from "@/components/simulation/AnalyticsDashboard";
 import StepByStepMode from "@/components/simulation/StepByStepMode";
+import ChannelVisualization from "@/components/simulation/ChannelVisualization";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 
 
 const Simulation = () => {
@@ -30,6 +32,7 @@ const Simulation = () => {
   const [currentPhotonIndex, setCurrentPhotonIndex] = useState(-1);
   const [photonCount, setPhotonCount] = useState(16);
   const [stepByStepMode, setStepByStepMode] = useState(false);
+  const [showChannelVisualization, setShowChannelVisualization] = useState(false);
 
   useEffect(() => {
     if (isSimulating && currentPhotonIndex < photons.length - 1) {
@@ -47,12 +50,14 @@ const Simulation = () => {
 
   const handleReset = () => {
     setCurrentPhotonIndex(-1);
+    setShowChannelVisualization(false);
     resetSimulation();
   };
 
   const secretKey = getSecretKey();
   const matchedPhotons = getMatchedPhotons();
   const errorRate = getErrorRate();
+  const simulationComplete = photons.length > 0 && currentPhotonIndex >= photons.length - 1;
 
   return (
     <div className="min-h-screen bg-background">
@@ -141,7 +146,7 @@ const Simulation = () => {
               photons={photons} 
               onExit={() => setStepByStepMode(false)} 
             />
-          ) : photons.length > 0 && (
+          ) : photons.length > 0 && !showChannelVisualization && (
             <>
               <PhotonScene 
                 photons={photons} 
@@ -172,6 +177,41 @@ const Simulation = () => {
                 </div>
               </Card>
 
+              {/* Channel Visualization Button */}
+              {simulationComplete && (
+                <Card className="p-4">
+                  <div className="flex items-center justify-center gap-2">
+                    <TooltipProvider>
+                      <Tooltip>
+                        <TooltipTrigger asChild>
+                          <Button
+                            onClick={() => setShowChannelVisualization(true)}
+                            variant="outline"
+                            className="bg-gradient-quantum"
+                          >
+                            <Waves className="mr-2 w-4 h-4" />
+                            Visualize Quantum Channel
+                          </Button>
+                        </TooltipTrigger>
+                        <TooltipContent>
+                          <p>Click to visualize how photons traveled through the quantum channel</p>
+                        </TooltipContent>
+                      </Tooltip>
+                    </TooltipProvider>
+                    <TooltipProvider>
+                      <Tooltip>
+                        <TooltipTrigger>
+                          <HelpCircle className="w-4 h-4 text-muted-foreground" />
+                        </TooltipTrigger>
+                        <TooltipContent>
+                          <p>Click to visualize how photons traveled through the quantum channel</p>
+                        </TooltipContent>
+                      </Tooltip>
+                    </TooltipProvider>
+                  </div>
+                </Card>
+              )}
+
               {/* Results and Analytics Tabs */}
               <Tabs defaultValue="analytics" className="w-full">
                 <TabsList className="grid w-full grid-cols-2">
@@ -197,6 +237,38 @@ const Simulation = () => {
                   />
                 </TabsContent>
               </Tabs>
+            </>
+          )}
+
+          {/* Channel Visualization View */}
+          {showChannelVisualization && (
+            <>
+              <div className="flex items-center justify-between mb-4">
+                <h2 className="text-2xl font-bold bg-gradient-quantum bg-clip-text text-transparent">
+                  Quantum Channel Visualization
+                </h2>
+                <Button
+                  onClick={() => setShowChannelVisualization(false)}
+                  variant="outline"
+                >
+                  <ArrowLeft className="mr-2 w-4 h-4" />
+                  Back to Results
+                </Button>
+              </div>
+              <ChannelVisualization eveEnabled={eveEnabled} photonCount={photons.length} />
+              <Card className="p-4 mt-4 bg-primary/5 border-primary/20">
+                <div className="text-sm text-muted-foreground">
+                  <p className="mb-2">
+                    <strong>Channel Visualization:</strong> Watch as photons travel through the quantum channel from Alice to Bob.
+                  </p>
+                  {eveEnabled && (
+                    <p className="text-destructive">
+                      <strong>⚠️ Eve is intercepting:</strong> Notice the red flashes when photons pass through Eve's position, 
+                      introducing errors into the quantum transmission.
+                    </p>
+                  )}
+                </div>
+              </Card>
             </>
           )}
 

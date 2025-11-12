@@ -125,7 +125,7 @@ const Home = () => {
                 role: "Report Writer",
                 description: "Aspiring Quantum Researcher",
                 color: "secondary",
-                portfolio: "https://pranav-portfolio.example.com",
+                portfolio: "../../pranav/pranav.html",
                 github: "https://github.com/pranav-a"
               },
               {
@@ -134,14 +134,14 @@ const Home = () => {
                 description: "Quantum cryptography enthusiast",
                 color: "destructive",
                 portfolio: "https://doortosurya.me",
-                github: "https://github.com/surya-s"
+                github: "https://github.com/surya-749"
               },
               {
                 name: "Naveena Priyan",
                 role: "UI/UX Designer and Content Researcher",
                 description: "Passionate about making complex topics accessible",
                 color: "accent",
-                portfolio: "https://naveena-portfolio.example.com",
+                portfolio: "../../naveena/naveena.html",
                 github: "https://github.com/naveena-priyan"
               }
             ].map((member, index) => (

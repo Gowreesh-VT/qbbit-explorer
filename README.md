@@ -11,7 +11,7 @@ A project for exploring and analyzing quantum bit operations and quantum computi
 ## Installation
 
 ```bash
-git clone https://github.com/yourusername/qbbit-explorer.git
+git clone https://github.com/Gowreesh-VT/qbbit-explorer.git
 cd qbbit-explorer
 npm install
 ```

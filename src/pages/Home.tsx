@@ -129,7 +129,7 @@ const Home = () => {
                 github: "https://github.com/pranav-a"
               },
               {
-                name: "Surya S",
+                name: "Surya R",
                 role: "PPT Creator",
                 description: "Quantum cryptography enthusiast",
                 color: "destructive",
